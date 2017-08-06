@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package jdo;
-
+import gnu.getopt.LongOpt;
 /**
  *
  * @author NQMTri
@@ -16,6 +16,7 @@ public class JDo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
     }
     
 }
