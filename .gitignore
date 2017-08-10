@@ -22,3 +22,6 @@
 hs_err_pid*
 /JDo/nbproject/private/
 /build/
+
+# INPUT TODO FILES
+*.json

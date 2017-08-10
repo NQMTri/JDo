@@ -67,6 +67,17 @@ public class Todo {
         }        
     }
     
+    /**
+     * Convert Todo object into JSON object.
+     * @return The JSON representation of Todo object.
+     */
+    public JSONObject toJSON(){
+        return new JSONObject().put("timestamp", this.timestamp)
+                .put("tags",this.tags)
+                .put("content", this.content)
+                .put("deadline", this.deadline);        
+    }
+    
     // Getters and setters 
     // ====================
     

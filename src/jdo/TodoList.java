@@ -25,6 +25,8 @@ package jdo;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import org.json.*;
 
@@ -67,5 +69,28 @@ public final class TodoList {
         }
     }
     
+    /**
+     * Create a JSONArray of the Todo list. 
+     * @return A JSONArray of the Todo list as JSONObject.
+     */
+    public JSONArray toJSON(){
+        JSONArray result = new JSONArray();
+        this.value.forEach((i) -> {
+            result.put(i.toJSON());
+        });
+        return result;
+    }
     
+    /**
+     * Write TODO JSON to file. 
+     */
+    public void writeToFile(){
+        try{
+            FileWriter fout = new FileWriter(this.fileName);
+            this.toJSON().write(fout);
+        }
+        catch(IOException|JSONException e){
+            System.out.println(e);
+        }
+    }
 }

@@ -20,6 +20,7 @@ public class JDo {
         // Get command line arguments
         Getopt getopt = new Getopt("JDo", args, "hd:c:");
         int c=0;
+        boolean isChanged = false;
         String optArg = null;
         while((c=getopt.getopt()) != -1){
             switch(c){
@@ -28,11 +29,13 @@ public class JDo {
                     break;
                 case 'd':
                     optArg = getopt.getOptarg();
+                    isChanged = true;
                     System.out.println("You delete item " + optArg);
                     // TODO : Implement logic here
                     break;
                 case 'c':
                     optArg = getopt.getOptarg();
+                    isChanged = true;
                     System.out.println("You created item with content " + optArg);
                     // TODO : Implement logic here
                     break;
@@ -40,5 +43,7 @@ public class JDo {
                     System.out.println("Incorrect argument(s)");
             }
         } 
+        // Write back to file whenever there is any change.
+        if(isChanged) tdlist.writeToFile();
     }    
 }
