@@ -57,7 +57,6 @@ public final class TodoList {
                 if(todoArray.isNull(i)) continue;
                 JSONObject tmp = (JSONObject) todoArray.get(i);
                 result.add(new Todo(tmp));
-                System.out.println(tmp.toString());
             }
         }
         catch(FileNotFoundException exc){
@@ -85,12 +84,29 @@ public final class TodoList {
      * Write TODO JSON to file. 
      */
     public void writeToFile(){
+        FileWriter fout = null;
         try{
-            FileWriter fout = new FileWriter(this.fileName);
+            fout = new FileWriter(this.fileName);
             this.toJSON().write(fout);
         }
         catch(IOException|JSONException e){
             System.out.println(e);
         }
+        finally{
+            try{
+                if(fout!=null) fout.close();
+            }
+            catch(IOException ex){
+                System.out.println(ex);
+            }            
+        }
+    }
+    
+    /**
+     * Appends new todo to the list. 
+     * @param element New Todo object to be added.
+     */
+    public void addNewTodo(Todo element){
+        this.value.add(element);
     }
 }

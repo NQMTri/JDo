@@ -34,10 +34,18 @@ public class JDo {
                     // TODO : Implement logic here
                     break;
                 case 'c':
-                    optArg = getopt.getOptarg();
-                    isChanged = true;
+                    optArg = getopt.getOptarg().trim();
+                    // Check for argument eligibility.
+                    if(optArg.length()<1){
+                        System.out.println("TODO is empty, aborting!");
+                        break;
+                    }
+                    // TODO : Implement tags and deadline feature.
+                    Todo tmp = new Todo(optArg,"",System.currentTimeMillis()/1000);
+                    tdlist.addNewTodo(tmp);
+                    
+                    isChanged = true;                    
                     System.out.println("You created item with content " + optArg);
-                    // TODO : Implement logic here
                     break;
                 default:
                     System.out.println("Incorrect argument(s)");

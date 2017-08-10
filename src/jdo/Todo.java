@@ -55,10 +55,10 @@ public class Todo {
      */
     public Todo(JSONObject jsonObj){
         try{
-            this.timestamp =Long.valueOf(jsonObj.getString("timestamp"));
+            this.timestamp =jsonObj.getLong("timestamp");
             this.content = jsonObj.getString("content");
             this.tags = jsonObj.getString("tags");
-            this.deadline = Long.valueOf(jsonObj.getString("deadline"));
+            this.deadline = jsonObj.getLong("deadline");
         }
         // Catch and print out exception generally.
         // TODO: Bad implementation!. Fix later
@@ -126,4 +126,5 @@ public class Todo {
     }
     // End getter and setter section
     // ====================        
+    
 }
