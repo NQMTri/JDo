@@ -50,6 +50,23 @@ public class JDo {
     }
     
     private static boolean removeTodo(String[] args, TodoList tdlist){
+        // Check for error, must have at least 2 arguments
+        if(args.length<1) {
+            System.out.println("Error: insufficient arguments!");
+            return false;
+        }
+        Integer idx = null;
+        try{
+            idx = Integer.valueOf(args[0]);
+            if(idx<0) idx+= tdlist.getSize();
+            tdlist.removeTodo(idx);
+        }
+        catch(NumberFormatException|IndexOutOfBoundsException ex){
+            System.out.println(ex);
+            System.out.println("The given index is not found!");
+            return false;
+        }
+        System.out.format("Todo at index %1$d is deleted!\n", idx);
         return true;
     }
     

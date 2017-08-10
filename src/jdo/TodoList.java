@@ -136,4 +136,14 @@ public final class TodoList {
     public int getSize(){
         return this.value.size();
     }
+    
+    public void removeTodo(int idx) throws IndexOutOfBoundsException{
+        try{
+            this.value.remove(idx);
+        }
+        catch(IndexOutOfBoundsException ex){
+            throw ex;
+            
+        }        
+    }
 }
