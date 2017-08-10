@@ -50,6 +50,17 @@ public class Todo {
     }
     
     /**
+     * Constructor for Todo class without deadline.
+     * @param content The content of the todo in text. 
+     * @param tags Tags given to that todo, each tag start with "#".
+     */
+    public Todo(String content, String tags){
+        this(content, tags,-1);
+    }
+    
+    
+    
+    /**
      * Constructor for Todo class, parse Todo object from a JSONObject.
      * @param jsonObj The given JSONObject to parse from.
      */

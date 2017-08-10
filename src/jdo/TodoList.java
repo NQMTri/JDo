@@ -109,4 +109,31 @@ public final class TodoList {
     public void addNewTodo(Todo element){
         this.value.add(element);
     }
+    
+    /**
+     * Get ith Todo in the list. If a negative in the range [-list.size(),-1]
+     * is given, the element is counted from the end to the start.
+     * 
+     * @param i the index of the todo item.
+     * @return The given todo item.
+     */
+    public Todo getTodo(int i){
+        Todo result = null;
+        try{
+            if(i<0) i+=this.value.size();
+            result = this.value.get(i);
+        }
+        catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println(ex);
+        }
+        return result;
+    }
+    
+    /**
+     * Return the size of the current todo list.
+     * @return The size of the current todo list.
+     */
+    public int getSize(){
+        return this.value.size();
+    }
 }
