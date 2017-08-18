@@ -14,24 +14,35 @@ import java.util.*;
  * @author NQMTri
  */
 public class JDo {
-    private static final String TODO_FILE_NAME =  "TODO_FILE.json";
+    private static final String TODO_FILE_NAME =  "./TODO_FILE.json";
+    
+    private static Integer getInteger(String param){
+        Integer result = null;
+        try{
+            result = Integer.valueOf(param);
+        }
+        catch(NumberFormatException exc){
+            System.out.println(exc);
+            System.out.println("The passed argument is not in correct Integer format.");
+        }
+        return result;
+    }
        
     private static void printOut(String[] args, TodoList tdlist){
         // Get command line arguments
-        //System.out.print(args);
-        if(args.length<1){
+        
+        if(args==null||args.length<1){
             args=new String[1];
             args[0] = "-a";
         }
-        
+        System.out.println(args.length);
         Getopt getopt = new Getopt("JDo", args, "a");
         int c=0;        
-        //String optArg = null;
+        String optArg = null;
         try{
             while((c=getopt.getopt()) != -1){
                 switch(c){
                     case 'a':    
-                        //System.out.println("haha");
                     default:
                         for(int i=0; i < tdlist.getSize(); ++i){
                             System.out.format("%1$5d : %2$s\n", i, 
@@ -131,6 +142,35 @@ public class JDo {
         return true;
     }
     
+    private static boolean moveTodo(String[] args, TodoList tdlist, char opType){
+        // Check for error, must have exactly 3 arguments
+        if(args.length!=2) {
+            System.out.println("Error: incorrect number of arguments! Only 2 args");
+            return false;
+        }
+        
+        // Read and convert arguments.
+        Integer idx = getInteger(args[0]), position = getInteger(args[1]);
+        if(idx==null || position==null){
+            return false;
+        }
+        boolean result = false;
+        switch(opType){
+            case 's':
+                result = tdlist.swapTodo(idx,position);
+                break;
+            case 'm':
+                result = tdlist.swapTodo(idx,idx + position);
+                break;
+            default:
+                System.out.println("OPCODE Error: " + 
+                        "Something is wrong in the given type of operation!");
+                result = false;
+                break;
+        }
+        return result;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -153,11 +193,18 @@ public class JDo {
         else if(args[0].equals("print")){
             printOut(argv,tdlist);
         }
+        else if(args[0].equals("move")){
+            isChanged = moveTodo(argv, tdlist, 'm');
+            printOut(null,tdlist);
+        }
+        else if(args[0].equals("swap")){
+            isChanged = moveTodo(argv, tdlist, 's');
+            printOut(null,tdlist);
+        }
         else{
             System.out.println("There is no argument match with the list." + 
                     " Please refers the documentation.");
         }
-         
         // Write back to file whenever there is any change.
         if(isChanged) tdlist.writeToFile();
     }    

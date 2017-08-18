@@ -137,13 +137,39 @@ public final class TodoList {
         return this.value.size();
     }
     
+    /**
+     * Remove the Todo item at index idx
+     * @param idx The index of Todo item to be deleted.
+     */
     public void removeTodo(int idx) throws IndexOutOfBoundsException{
         try{
             this.value.remove(idx);
         }
         catch(IndexOutOfBoundsException ex){
-            throw ex;
-            
+            throw ex;            
         }        
+    }
+    
+    /**
+     * Swap Todo item to the new position
+     * @param idx Index of the Todo item to move.
+     * @param position Index of the position, they will be automatically set to 
+     * be the nearest possible position.
+     * @return true if operation is done successfully, false otherwise.
+     */
+    public boolean swapTodo(int idx, int position) throws IndexOutOfBoundsException{
+        try{
+            position = position<0?0:Math.min(position, this.getSize()-1);
+            Todo tmp = this.getTodo(idx);
+            this.value.set(idx, this.getTodo(position));
+            this.value.set(position,tmp);
+        }
+        catch(IndexOutOfBoundsException exc){
+            System.out.println(exc);
+            System.out.println("Given position of the todo item or its new" + 
+                    " position is out of bound!");
+            return false;
+        }
+        return true;
     }
 }
