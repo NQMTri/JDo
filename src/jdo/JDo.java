@@ -55,7 +55,7 @@ public class JDo {
             args=new String[1];
             args[0] = "-a";
         }
-        System.out.println(args.length);
+        
         Getopt getopt = new Getopt("JDo", args, "a");
         int c=0;        
         String optArg = null;
