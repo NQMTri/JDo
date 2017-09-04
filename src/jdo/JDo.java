@@ -66,7 +66,11 @@ public class JDo {
                     default:
                         for(int i=0; i < tdlist.getSize(); ++i){
                             System.out.format("%1$5d : %2$s\n", i, 
-                                    tdlist.getTodo(i).getContent());
+                                    tdlist.getTodo(i).printOut(true,true,false));
+                            
+//  Put writing function to TODO objects.
+//                            System.out.format("%1$5d : %2$s\n", i, 
+//                                    tdlist.getTodo(i).getContent());
                         }
                         break;               
                         //System.out.println("Incorrect argument(s)");                    

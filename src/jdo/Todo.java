@@ -23,6 +23,9 @@
  */
 package jdo;
 
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +34,9 @@ import org.json.JSONObject;
  * @author NQMTri
  */
 public class Todo {
+    private static String OUTPUT_DATE_FORMAT = "dd-MM-yyyy";
+    // Deadline notification line is set to 2 days before final date.
+    private static int DEADLINE_NOTIFICATION = 2;
     private long timestamp;
     private String content;
     private String tags;
@@ -137,5 +143,41 @@ public class Todo {
     }
     // End getter and setter section
     // ====================        
+    
+    private boolean isNearDeadline(){
+        
+        return false;
+    }
+    
+    /**
+     * @param printDeadline Print Deadline or not.
+     * @param printTags Print todo tags or not
+     * @param beautify Print beautify characters or not.
+     */
+    public String printOut( Boolean printDeadline, Boolean printTags, 
+                            Boolean beautify){
+        StringBuilder sb = new StringBuilder();
+        String divider = " || ";
+        
+        if(this.isNearDeadline()){
+            sb.append("!!!").append(divider);
+        }
+        
+        if(printDeadline){
+            String deadline = "   None   ";
+            if(this.deadline>0){
+                Date dt = new Date(this.deadline*1000L);
+                SimpleDateFormat sdf = new SimpleDateFormat(this.OUTPUT_DATE_FORMAT);
+                deadline=sdf.format(dt);
+            }
+            sb.append(deadline).append(divider);
+        }
+        sb.append(this.content);
+        
+        if(printTags){  
+            sb.append(divider).append(this.tags);
+        }
+        return sb.toString();
+    }
     
 }
