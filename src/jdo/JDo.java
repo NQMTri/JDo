@@ -34,7 +34,7 @@ import java.util.*;
  * @author NQMTri
  */
 public class JDo {
-    private static final String TODO_FILE_NAME =  "TODO_FILE.json";
+    private static final String TODO_FILE_NAME =  "/opt/jdo/TODO_FILE.json";
     
     private static Integer getInteger(String param){
         Integer result = null;
