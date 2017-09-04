@@ -164,9 +164,9 @@ public class Todo {
         }
         
         if(printDeadline){
-            String deadline = "    None    ";
+            String deadline = "   None   ";
             if(this.deadline>0){
-                Date dt = new Date(this.deadline*1000L);
+                Date dt = new Date(this.deadline);
                 SimpleDateFormat sdf = new SimpleDateFormat(this.OUTPUT_DATE_FORMAT);
                 deadline=sdf.format(dt);
             }
