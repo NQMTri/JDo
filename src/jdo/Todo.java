@@ -145,7 +145,15 @@ public class Todo {
     // ====================        
     
     private boolean isNearDeadline(){
-        
+        if((this.deadline>0)){
+            long remainingTime = this.deadline - System.currentTimeMillis();
+            if(remainingTime<0){
+                return false;
+            }
+            else if(remainingTime<=DEADLINE_NOTIFICATION*24*3600*1000L){
+                return true;
+            }
+        }
         return false;
     }
     
@@ -159,9 +167,8 @@ public class Todo {
         StringBuilder sb = new StringBuilder();
         String divider = " || ";
         
-        if(this.isNearDeadline()){
-            sb.append("!!!").append(divider);
-        }
+        String indicator = this.isNearDeadline()?"!!!":"@@@";
+        sb.append(indicator).append(divider);
         
         if(printDeadline){
             String deadline = "   None   ";

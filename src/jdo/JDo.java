@@ -138,9 +138,10 @@ public class JDo {
                 case 'd':
                     try{
                         // Parse given date to set deadline.
-                        DateFormat df = new SimpleDateFormat("dd/mm/yyyy",Locale.ENGLISH);
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
                         Date deadline = df.parse(optArg);
                         result.setDeadline(deadline.getTime());
+                     
                     }
                     catch(NullPointerException | IllegalArgumentException ex){
                         System.out.println(ex);
